@@ -1,5 +1,7 @@
 const express = require('express');
 var bodyParser = require('body-parser');
+// var address=require('address');
+const moment=require("moment")
 
 const route = require('./routes/route');
 const { default: mongoose } = require('mongoose');
@@ -14,6 +16,14 @@ useNewUrlParser: true
 })
 .then( ()=> console.log('mongoDb is connected'))
 .catch(err => console.log(err))
+// app.use (
+//     function (req, res, next) {
+//         let timestamp=moment().format('YYYY-MM-DD HH:mm:ss');
+        
+//         console.log (timestamp,req.ip,req.path);
+    
+//   }
+//   );
 app.use('/', route);
 
 app.listen(process.env.PORT || 3000, function() {

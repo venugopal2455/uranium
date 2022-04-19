@@ -1,16 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const moment=require("moment")
+const middleware=require('../middleware/middleware')
 
-const batchModel= require("../models/batchModel")
-const devModel= require("../models/developerModel")
+function middleware1(req, res, next) {
+    let timestamp=moment().format('YYYY-MM-DD HH:mm:ss');
+    console.log(`${timestamp} , ${req.socket.remoteAddress} , ${req.route.path}`)
+    next();
+}
 
-const devController=require("../controllers/devController")
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
 
-router.post("/createBatch", devController.createBatch)
-router.post("/createDeveloper",devController.createDeveloper)
-router.get("/scholarship",devController.scholarship)
-router.get("/developers",devController.developers)
+
+
+router.get("/mid1", middleware1, middleware.mid1)
+router.get("/mid2",middleware.mid2)
+router.get("/mid3",middleware.mid3)
+
 module.exports = router;
