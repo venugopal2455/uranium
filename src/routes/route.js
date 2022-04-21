@@ -1,19 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const moment=require("moment")
-const middleware=require('../middleware/middleware')
+const controller = require("../controllers/Controller")
+const mid = require("../middleware/middleware")
 
-function middleware1(req, res, next) {
-    let timestamp=moment().format('YYYY-MM-DD HH:mm:ss');
-    console.log(`${timestamp} , ${req.socket.remoteAddress} , ${req.route.path}`)
-    next();
-}
+router.post("/createProduct", controller.createProduct)
 
+router.post("/createUser", controller.createUser)
 
-
-
-router.get("/mid1", middleware1, middleware.mid1)
-router.get("/mid2",middleware.mid2)
-router.get("/mid3",middleware.mid3)
+// router.post("/createOrder", mid.mid1, controller.createOrder)
 
 module.exports = router;

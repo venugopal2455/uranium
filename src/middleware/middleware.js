@@ -1,22 +1,13 @@
-const mid1= function ( req, res, next) {
-    console.log("you are middleware1")
-    next()
-    res.send({msg:"you are in"})
+const orderModel = require("../model/orderModel")
+const userModel = require("../model/userModel")
+
+const mid1 = async function (req, res, next) {
+    await userModel.updateMany({}, { $set: { isFreeAppUser: false } },{upsert:true})
+    await orderModel.updateMany({}, { $set: { isFreeAppUser: false } },{upsert:true})
+    if (!req.headers["isfreeappuser"])
+        res.send({ msg: "the request is missing a mandatory header" })
+    else
+        next()
 }
 
-const mid2= function ( req, res, next) {
-    console.log("you are middleware2")
-    next()
-    res.send({msg:"you are in"})
-}
-
-const mid3= function ( req, res, next) {
-    console.log("you are middleware3")
-    next()
-    res.send({msg:"you are in"})
-}
-
-
-module.exports.mid1= mid1
-module.exports.mid2= mid2
-module.exports.mid3= mid3
+module.exports.mid1 = mid1
