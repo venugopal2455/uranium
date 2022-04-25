@@ -18,9 +18,7 @@ useNewUrlParser: true
 .catch(err => console.log(err))
 // app.use (
 //     function (req, res, next) {
-//         let timestamp=moment().format('YYYY-MM-DD HH:mm:ss');
-        
-//         console.log (timestamp,req.ip,req.path);
+//        let header=req.headers.isfreeappuser
     
 //   }
 //   );
